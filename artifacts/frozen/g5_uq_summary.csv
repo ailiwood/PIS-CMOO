@@ -1,0 +1,9 @@
+route,model,target_variant,coverage_90_macro,coverage_95_macro,coverage_95_worst_site,coverage_90_worst_site,width_90_mean,width_95_mean,width_95_median
+CORE_CC,tabpfn_v2,log1p,0.8985,0.9514,0.9118,0.8346,6.1402,7.9889,7.4185
+CORE_CC,tabicl,log1p,0.9004,0.9509,0.9154,0.8379,6.0604,7.7883,7.3663
+CORE_CC,tabdpt,log1p,0.8987,0.9528,0.9172,0.8414,6.1217,7.9406,7.474
+EXTENDED_FOLD_IMPUTED,catboost,log1p,0.8998,0.9531,0.9154,0.8346,6.1603,7.9807,7.4295
+CORE_CC,catboost,log1p,0.8981,0.9524,0.9081,0.8414,6.2353,7.9183,7.386
+CORE_CC,extra_trees,log1p,0.897,0.9489,0.8971,0.8382,6.1196,7.9316,7.3037
+CORE_CC,tabpfn_v2,raw,0.8974,0.948,0.8529,0.761,7.318,10.8739,10.9616
+EXTENDED_FOLD_IMPUTED,extra_trees,log1p,0.8951,0.9481,0.9103,0.8241,6.1345,8.2163,7.5961

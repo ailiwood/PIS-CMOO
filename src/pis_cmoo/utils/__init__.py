@@ -1,0 +1,1 @@
+"""Shared path / hashing / loader utilities (frozen _common.py)."""

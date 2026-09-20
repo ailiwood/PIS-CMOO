@@ -1,0 +1,103 @@
+{
+  "stage": "G8_EXTERNAL_EVALUATION",
+  "n_records_with_outcome": 275,
+  "prediction_metrics": {
+    "tabdpt": {
+      "n": 269,
+      "mae": 0.8198440079887549,
+      "rmse": 1.4624028317400377,
+      "r2": 0.45951168397129294,
+      "median_ae": 0.46661844855206747
+    },
+    "catboost": {
+      "n": 269,
+      "mae": 0.9309947982691094,
+      "rmse": 1.7034121902335155,
+      "r2": 0.2666829660936779,
+      "median_ae": 0.4765854324833778
+    }
+  },
+  "qualification_classification": {
+    "tabdpt": {
+      "n": 269,
+      "mcc": 0.6439,
+      "balanced_accuracy": 0.8031,
+      "sensitivity": 0.6739,
+      "specificity": 0.9322,
+      "tp": 62,
+      "fp": 12,
+      "tn": 165,
+      "fn": 30,
+      "auroc_qualification_margin": 0.9153770572340948,
+      "pr_auc_qualification_margin": 0.8588590622935856
+    },
+    "catboost": {
+      "n": 269,
+      "mcc": 0.6094,
+      "balanced_accuracy": 0.7735,
+      "sensitivity": 0.5978,
+      "specificity": 0.9492,
+      "tp": 55,
+      "fp": 9,
+      "tn": 168,
+      "fn": 37,
+      "auroc_qualification_margin": 0.9086219602063375,
+      "pr_auc_qualification_margin": 0.848169042667143
+    }
+  },
+  "uq_metrics": {
+    "tabdpt": {
+      "90": {
+        "coverage": 0.9517,
+        "mean_width": 1.9474,
+        "median_width": 1.6501,
+        "undercoverage_count": 13,
+        "upper_bound_violation_count": 13
+      },
+      "95": {
+        "coverage": 0.974,
+        "mean_width": 3.0759,
+        "median_width": 2.6063,
+        "undercoverage_count": 7,
+        "upper_bound_violation_count": 7
+      }
+    },
+    "catboost": {
+      "90": {
+        "coverage": 0.9591,
+        "mean_width": 2.1859,
+        "median_width": 1.7915,
+        "undercoverage_count": 11,
+        "upper_bound_violation_count": 11
+      },
+      "95": {
+        "coverage": 0.9777,
+        "mean_width": 3.5655,
+        "median_width": 2.922,
+        "undercoverage_count": 6,
+        "upper_bound_violation_count": 6
+      }
+    }
+  },
+  "observed_action_safety": [
+    {
+      "model": "tabdpt",
+      "n_observed_actions": 275,
+      "point_safe_but_unqualified": 12,
+      "ucb90_safe_but_unqualified": 0,
+      "ucb90_unsafe_but_qualified_conservative": 84,
+      "ucb90_safe_rate": 0.0291
+    },
+    {
+      "model": "catboost",
+      "n_observed_actions": 275,
+      "point_safe_but_unqualified": 9,
+      "ucb90_safe_but_unqualified": 0,
+      "ucb90_unsafe_but_qualified_conservative": 85,
+      "ucb90_safe_rate": 0.0255
+    }
+  ],
+  "no_protocol_modification": true,
+  "generated_at_utc": "2026-09-02T07:31:50.777509+00:00",
+  "cohort_note": "qualification classification metrics are on prediction-evaluable (n=269); regression metrics on n=269"
+}

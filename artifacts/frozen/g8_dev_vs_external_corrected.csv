@@ -1,0 +1,15 @@
+model,scale,statistic,development,external,dev_unit,external_unit
+TabDPT,Lu,MAE,1.92,0.8198,six-mine LOMO macro,one untouched mine
+TabDPT,Lu,RMSE,5.3685,1.4624,six-mine LOMO macro,one untouched mine
+TabDPT,Lu,R2,0.4997,0.4595,six-mine LOMO macro,one untouched mine
+TabDPT,Lu,median_AE,0.6236,0.4666,six-mine LOMO macro,one untouched mine
+TabDPT,log1p,MAE,0.2688,0.2287,six-mine LOMO macro,one untouched mine
+TabDPT,log1p,RMSE,0.3721,0.3082,six-mine LOMO macro,one untouched mine
+TabDPT,log1p,R2,0.7676,0.629,six-mine LOMO macro,one untouched mine
+CatBoost,Lu,MAE,1.9719,0.931,six-mine LOMO macro,one untouched mine
+CatBoost,Lu,RMSE,5.5039,1.7034,six-mine LOMO macro,one untouched mine
+CatBoost,Lu,R2,0.4741,0.2667,six-mine LOMO macro,one untouched mine
+CatBoost,Lu,median_AE,0.6538,0.4766,six-mine LOMO macro,one untouched mine
+CatBoost,log1p,MAE,0.2761,0.2511,six-mine LOMO macro,one untouched mine
+CatBoost,log1p,RMSE,0.3797,0.3386,six-mine LOMO macro,one untouched mine
+CatBoost,log1p,R2,0.758,0.5522,six-mine LOMO macro,one untouched mine

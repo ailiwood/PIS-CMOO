@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-08-22T07:27:14.738046+00:00",
+  "n_configs": 38,
+  "n_eligible": 38,
+  "n_uq_floor_pass": 8,
+  "status": "CHAMPION_SELECTED",
+  "champion": {
+    "route": "CORE_CC",
+    "model": "tabdpt",
+    "target_variant": "log1p",
+    "family": "tfm",
+    "macro_mean_mae": 1.8118,
+    "macro_mean_rmse": 4.1657,
+    "worst_site_rmse": 9.5578,
+    "coverage_90_macro": 0.8987,
+    "coverage_95_macro": 0.9528,
+    "coverage_95_worst_site": 0.9172
+  },
+  "robust_alternate": {
+    "route": "EXTENDED_FOLD_IMPUTED",
+    "model": "catboost",
+    "target_variant": "log1p",
+    "family": "gradient_boosting",
+    "macro_mean_mae": 1.8504,
+    "macro_mean_rmse": 4.1758,
+    "worst_site_rmse": 9.6706
+  },
+  "selection_protocol": {
+    "rule1": "minimize raw-Lu macro MAE among eligible+UQ-floor-passing",
+    "tiebreak": "lower worst-site RMSE -> narrower 95% interval -> smaller coverage deficit -> simpler",
+    "excluded_sole_deciders": [
+      "R2",
+      "pooled",
+      "pilot"
+    ]
+  }
+}

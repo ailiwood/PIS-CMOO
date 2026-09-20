@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: If you use this software, please cite the associated article. The associated manuscript is currently in submission; a permanent DOI will be added here after acceptance.
+type: software
+title: "PIS-CMOO — cross-site uncertainty-aware prediction, verification, and multi-objective decision-support framework for underground grouting"
+version: 0.1.0-paper
+date-released: 2026-09-20
+repository-code: https://github.com/ailiwood/PIS-CMOO
+license: see-LICENSE_PENDING.md
+keywords:
+  - underground grouting
+  - leave-one-mine-out
+  - TabDPT
+  - CatBoost
+  - conformal prediction
+  - SHAP
+  - NSGA-III
+  - multi-objective optimization
+  - cross-model verification
+  - abstention
+abstract: >-
+  PIS-CMOO is a research codebase supporting a cross-site, uncertainty-aware
+  decision-support framework for underground grouting. The framework combines
+  leave-one-mine-out prediction (TabDPT primary, CatBoost optimization-response),
+  one-sided conformal upper-bound calibration from mine-balanced cross-site
+  residuals, SHAP interpretation, engineering-bound-aware NSGA-III multi-objective
+  optimization, independent cross-model verification with abstention, and a single
+  untouched external mine for honest evaluation. This public release ships the
+  frozen pipeline scripts, frozen aggregate artifacts, a verification script that
+  re-checks the manuscript's headline metrics, and a synthetic example dataset
+  for software smoke testing. The real field dataset is not distributed due to
+  commercial confidentiality.
+contact:
+  - family-names: Wood
+    given-names: Aili
+    alias: ailiwood
+    email: ailiwood@users.noreply.github.com
+references:
+  - type: article
+    title: "PIS-CMOO manuscript (under review)"
+    notes: |
+        The associated manuscript is in submission as of 2026-09-20.
+        Once accepted, the published article's DOI will be added here.

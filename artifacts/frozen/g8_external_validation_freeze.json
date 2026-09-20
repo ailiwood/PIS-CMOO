@@ -1,0 +1,19 @@
+{
+  "stage": "G8_EXTERNAL_VALIDATION_FREEZE",
+  "generated_at_utc": "2026-09-02T07:36:46.027848+00:00",
+  "unblind_timestamp_utc": "2026-09-02T07:30:55.966609+00:00",
+  "sc_m01_outcome_accessed": true,
+  "one_time_unblind_respected": true,
+  "no_post_outcome_scientific_adaptation": true,
+  "key_results": {
+    "n_sc_m01_records": 275,
+    "tabdpt_external_r2": 0.45951168397129294,
+    "tabdpt_external_mae": 0.8198440079887549,
+    "tabdpt_90_coverage": 0.9517,
+    "n_tree_safe_contexts": 41,
+    "n_eligible_contexts": 259,
+    "n_contexts_LevelB": 11
+  },
+  "registry_csv_sha256": "a44f9a25126f430412b0bfbeb49027e576e11322388c3ded9c9e8251938c1803",
+  "registry_json_sha256": "e682ae6885945d4fc1a11ed4761f83f197beeeb86a6863af7193f1c6763c0d02"
+}

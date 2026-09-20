@@ -1,0 +1,16 @@
+# Ensure consistent line endings across platforms.
+* text=auto eol=lf
+
+# Python source files
+*.py    text eol=lf
+*.pyi   text eol=lf
+
+# YAML / TOML / Markdown
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
+*.md    text eol=lf
+
+# CSV / JSON (line-ending sensitive; pin to LF)
+*.csv   text eol=lf
+*.json  text eol=lf

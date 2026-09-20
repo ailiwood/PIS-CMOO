@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pis-cmoo"
+version = "0.1.0-paper"
+description = "Cross-site uncertainty-aware prediction, verification, and multi-objective decision-support framework for underground grouting (public research-code release)."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "see-LICENSE_PENDING.md"}
+authors = [
+    {name = "Aili Wood", email = "ailiwood@users.noreply.github.com"},
+]
+keywords = [
+    "underground-grouting", "leave-one-mine-out", "TabDPT", "CatBoost",
+    "conformal-prediction", "SHAP", "NSGA-III", "multi-objective-optimization",
+    "cross-model-verification", "abstention",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pis_cmoo*"]

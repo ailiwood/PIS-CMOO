@@ -1,0 +1,3 @@
+model,n_evaluable,n_not_evaluable,point_safe_n,ucb90_safe_n,point_safe_but_unqualified,ucb90_safe_but_unqualified,ucb90_unsafe_but_qualified,ucb90_safe_rate,false_safe_rate
+TabDPT,269,6,74,8,12,0,84,8/269,0/269
+CatBoost,269,6,64,7,9,0,85,7/269,0/269

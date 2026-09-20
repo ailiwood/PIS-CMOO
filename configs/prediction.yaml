@@ -1,0 +1,73 @@
+# configs/prediction.yaml — frozen G5 prediction configuration
+# Mirrors: 010_true_data_analysis/08_validation/g8/freeze/g8_external_protocol_freeze.json
+#          and g5_selection_freeze.json
+
+final_seven_predictors:
+  - WCR
+  - GP_MPa
+  - grout_take_L_per_m
+  - grouting_time_h
+  - depth_m
+  - section_length_m
+  - pre_lugeon
+
+target:
+  name: post_lugeon
+  scale: log1p
+  units: Lu
+
+development_mines:
+  - GX-M01
+  - GX-M02
+  - GZ-M01
+  - GZ-M02
+  - YN-M01
+  - YN-M02
+
+external_mine: SC-M01
+
+split:
+  strategy: leave-one-mine-out
+  n_folds: 6
+  random_seed: 20260822
+
+primary_model:
+  name: TabDPT
+  route: CORE_CC
+  family: tfm
+  device: cpu
+  note: >
+    The TabDPT package version was frozen at G5 freeze time
+    (2026-08-22). Exact package / commit hash is recorded in the internal
+    g5_selection_freeze.json manifest. Reproducing the exact numerical results
+    requires the same TabDPT version and the same internal RNG seed.
+
+secondary_model:
+  name: CatBoost
+  route: EXTENDED_FOLD_IMPUTED
+  family: gradient_boosting
+  iterations: 1000
+  depth: 6
+  learning_rate: 0.05
+  loss_function: RMSE
+  random_seed: 20260822
+
+qualification:
+  definition: post_lugeon_le_acceptance_threshold_lu
+  threshold_source: record_specific_acceptance_threshold_lu
+  no_universal_threshold: true
+  positive_class: qualified
+
+metrics:
+  regression:
+    - MAE
+    - RMSE
+    - R2
+    - median_AE
+  classification:
+    - MCC
+    - balanced_accuracy
+    - sensitivity
+    - specificity
+    - AUROC_qualification_margin
+    - PR_AUC_qualification_margin

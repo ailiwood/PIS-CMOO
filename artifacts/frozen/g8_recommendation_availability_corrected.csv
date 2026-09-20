@@ -1,0 +1,6 @@
+metric,numerator,denominator,rate
+tree_safe / eligible,41,259,0.1583
+LevelB / eligible,11,259,0.0425
+LevelB / tree_safe,11,41,0.2683
+disagreement_only / eligible,30,259,0.1158
+no_tree_safe / eligible,218,259,0.8417

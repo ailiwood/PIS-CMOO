@@ -1,0 +1,42 @@
+# Python build / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Local environment / secrets
+.env
+.env.*
+
+# IDE / editor
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Test / type cache
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local-only outputs (paper-support, manuscript drafts, author notes)
+paper_local/
+manuscript_local/
+notes_local/
+outputs_local/
+*.log
+
+# DO NOT ignore the data, configs, scripts, tests, src, docs, artifacts, results
+# directories — these are required for reproducibility.

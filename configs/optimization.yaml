@@ -1,0 +1,72 @@
+# configs/optimization.yaml — frozen G7.0 / G7.5 / G7.6 optimization configuration
+# Mirrors: g7_6_full1387_status.json + g8_external_protocol_freeze.json
+
+optimizer:
+  algorithm: NSGA-III
+  constraint_config: C7
+  budget:
+    name: B1
+    population: 40
+    n_generations: 25
+    total_evaluations: 1000
+  seeds:
+    - 20260822
+    - 20260823
+    - 20260824
+    - 20260825
+    - 20260826
+
+response_model:
+  name: CatBoost
+  note: Used as the optimization response model (predicted post_lugeon).
+
+objectives:
+  - id: f1
+    name: predicted_post_lugeon
+    direction: minimize
+  - id: f2
+    name: grout_take_L_per_m
+    direction: minimize
+  - id: f3
+    name: grouting_time_h
+    direction: minimize
+
+constraints:
+  engineering_bounds:
+    description: per-record engineering limits (xl / xu)
+    variables:
+      - WCR_min_WCR
+      - WCR_max_max_WCR
+      - GP_MPa_allowable_GP_MPa
+      - grout_take_L_per_m_max_grout_take_L_per_m
+      - grouting_time_h_max_grouting_time_h
+  conformal_ucb:
+    description: one-sided conformal upper bound on log1p(predicted_post_lugeon) must be le acceptance_threshold_lu
+    source: g5_uq calibration
+    role: hard_constraint_not_objective
+  joint_support:
+    description: development-mined nearest-neighbor distance below threshold
+    source: g7_support.pkl
+    thr_95: 0.95
+
+representative_rule:
+  description: one decision + three roles per context
+  roles:
+    - conservative   # min f1
+    - resource_saving # min f2
+    - balanced        # closest to normalized centroid
+
+cross_model_verification:
+  rule: tree_ucb_safe_AND_tabdpt_audit_ucb_safe_AND_engineering_pass_AND_support_pass
+  level_b_outputs: "contexts satisfying the conjunction above"
+
+abstention_rule:
+  description: >
+    When tree-safe but TabDPT-unsafe, emit
+    MODEL_DISAGREEMENT_NO_CROSS_MODEL_VERIFIED_RECOMMENDATION
+    (no substitution, no Level-B recommendation).
+
+bootstrap_ci_rule: >
+  Single external mine forbids cross-site bootstrap CI. Optional pre-specified
+  borehole-cluster bootstrap labelled 'within-external-mine cluster uncertainty'
+  is allowed; no cross-site CI is reported.

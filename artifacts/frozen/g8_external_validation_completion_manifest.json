@@ -1,0 +1,15 @@
+{
+  "stage": "G8_EXTERNAL_VALIDATION_COMPLETION",
+  "one_time_outcome_unblind_valid": true,
+  "preoutcome_freeze_valid": true,
+  "no_post_unblind_scientific_adaptation": true,
+  "external_validation_scientific_protocol": "CLOSED",
+  "subsequent_changes_restricted_to": "reporting / provenance / denominator / scale correction only",
+  "corrected_tables_cannot_trigger_adaptation": true,
+  "cohort": {
+    "raw_external": 275,
+    "prediction_evaluable": 269,
+    "optimization_eligible": 259
+  },
+  "generated_at_utc": "2026-09-02T07:51:12.379154+00:00"
+}

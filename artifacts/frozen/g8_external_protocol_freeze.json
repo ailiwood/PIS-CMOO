@@ -1,0 +1,43 @@
+{
+  "stage": "G8_EXTERNAL_PROTOCOL_FREEZE",
+  "generated_at_utc": "2026-09-02T09:50:00Z",
+  "purpose": "Freeze the full external-validation protocol BEFORE any SC-M01 outcome is read. No SC-M01 outcome may be read before this file exists and is hashed.",
+  "allowed_external_input_columns": [
+    "province", "mine_id", "project_id", "borehole_id", "record_id",
+    "mine_type", "lithology", "karst_class", "fracture_class",
+    "hydrogeological_regime", "project_stage",
+    "depth_m", "section_length_m", "pre_lugeon", "groundwater_pressure_MPa",
+    "WCR", "GP_MPa", "grout_take_L_per_m", "grouting_time_h",
+    "acceptance_threshold_lu",
+    "allowable_GP_MPa", "min_WCR", "max_WCR", "max_grout_take_L_per_m", "max_grouting_time_h"
+  ],
+  "forbidden_outcome_columns": [
+    "post_lugeon", "qualified", "delta_lugeon", "relative_reduction", "log_reduction",
+    "flag_post_gt_pre", "flag_pressure_unassessable", "flag_allowable_lineage_issue",
+    "flag_depth_sequence_issue", "flag_core_incomplete"
+  ],
+  "final_training_mines": ["GX-M01", "GX-M02", "GZ-M01", "GZ-M02", "YN-M01", "YN-M02"],
+  "external_mine": "SC-M01",
+  "final_tabdpt_training_manifest": "G5 frozen TabDPT manifest: features=[WCR,GP_MPa,grout_take_L_per_m,grouting_time_h,depth_m,section_length_m,pre_lugeon], target=log1p(post_lugeon), TabDPTRegressor(device=cpu), all 6 development mines",
+  "final_catboost_training_manifest": "G5 frozen CatBoost: iterations=1000, depth=6, learning_rate=0.05, loss_function=RMSE, random_seed=20260822, all 6 development mines",
+  "uq_b_algorithm": {
+    "calibration": "6-fold leave-one-development-mine-out cross-site residuals (train 5, predict sixth)",
+    "nonconformity": "score = y_log1p - pred_log1p (one-sided)",
+    "distribution": "mine-balanced empirical distribution (each mine equal total weight)",
+    "quantile": "finite-sample 'higher' quantile (right-continuous at 1-alpha)"
+  },
+  "alpha": {"primary": 0.10, "sensitivity_95": 0.05, "sensitivity_85": 0.15},
+  "support_construction": "development mines only (g7_support.pkl scaler/nn/thr_95)",
+  "engineering_constraint_handling": "G7.0 frozen per-context xl/xu (min_WCR,max_WCR,allowable_GP_MPa,max_grout_take_L_per_m,max_grouting_time_h)",
+  "optimizer": {"algorithm": "NSGA-III", "constraint_config": "C7", "budget": "B1=1000 (pop=40, n_gen=25)"},
+  "optimizer_seeds": [20260822, 20260823, 20260824, 20260825, 20260826],
+  "objectives": ["f1=predicted post_lugeon (min)", "f2=grout_take_L_per_m (min)", "f3=grouting_time_h (min)"],
+  "representative_rule": "conservative (min f1) / resource_saving (min f2) / balanced (closest to normalized centroid); one decision + role_set",
+  "cross_model_verification_rule": "Level-B = TREE_UCB_SAFE AND TABDPT_AUDIT_UCB_SAFE AND ENGINEERING_PASS AND SUPPORT_PASS",
+  "abstention_rule": "tree-safe / TabDPT-unsafe => MODEL_DISAGREEMENT_NO_CROSS_MODEL_VERIFIED_RECOMMENDATION (no substitution)",
+  "external_metrics": ["MAE", "RMSE", "R2", "median_AE", "qualification_margin_auroc_pr_auc", "MCC", "balanced_accuracy", "sensitivity", "specificity", "90/95 coverage", "mean/median width", "undercoverage_count", "upper_bound_violation_count"],
+  "bootstrap_ci_rule": "single external mine => NO cross-site bootstrap CI; optional pre-specified borehole-cluster bootstrap labelled 'within-external-mine cluster uncertainty' only",
+  "domain_shift_metrics": ["standardized_mean_difference", "wasserstein_distance", "range_support_exceedance", "categorical_prevalence_divergence"],
+  "no_adaptation_rule": "No SC-M01 outcome may re-select model / UQ / alpha / support / bounds / optimizer / budget / representative rule / abstention rule.",
+  "sc_m01_outcome_access": "FORBIDDEN until g8_preoutcome_freeze.json records SC_M01_OUTCOME_ACCESSED=FALSE and a test confirms no forbidden column is loaded."
+}

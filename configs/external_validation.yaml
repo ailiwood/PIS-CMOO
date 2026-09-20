@@ -1,0 +1,78 @@
+# configs/external_validation.yaml — frozen G8 / G8.1 external validation protocol
+# Mirrors: g8_external_protocol_freeze.json + g8_external_validation_freeze.json +
+#          g8_external_validation_completion_manifest.json
+
+protocol_stage: G8_EXTERNAL_PROTOCOL_FREEZE
+validation_stage: G8_EXTERNAL_VALIDATION_FREEZE
+reconciliation_stage: G8_EXTERNAL_VALIDATION_COMPLETION
+
+external_mine: SC-M01
+final_training_mines:
+  - GX-M01
+  - GX-M02
+  - GZ-M01
+  - GZ-M02
+  - YN-M01
+  - YN-M02
+
+allowed_external_input_columns:
+  - province
+  - mine_id
+  - project_id
+  - borehole_id
+  - record_id
+  - mine_type
+  - lithology
+  - karst_class
+  - fracture_class
+  - hydrogeological_regime
+  - project_stage
+  - depth_m
+  - section_length_m
+  - pre_lugeon
+  - groundwater_pressure_MPa
+  - WCR
+  - GP_MPa
+  - grout_take_L_per_m
+  - grouting_time_h
+  - acceptance_threshold_lu
+  - allowable_GP_MPa
+  - min_WCR
+  - max_WCR
+  - max_grout_take_L_per_m
+  - max_grouting_time_h
+
+forbidden_outcome_columns:
+  - post_lugeon
+  - qualified
+  - delta_lugeon
+  - relative_reduction
+  - log_reduction
+  - flag_post_gt_pre
+  - flag_pressure_unassessable
+  - flag_allowable_lineage_issue
+  - flag_depth_sequence_issue
+  - flag_core_incomplete
+
+cohorts:
+  raw_external: 275
+  prediction_evaluable: 269
+  optimization_eligible: 259
+
+prediction_exclusion_reason: missing_7_feature_predictor
+prediction_excluded_records:
+  - SC-M01-P01-B001-S03
+  - SC-M01-P01-B002-S03
+  - SC-M01-P01-B002-S05
+  - SC-M01-P01-B005-S07
+  - SC-M01-P01-B007-S07
+  - SC-M01-P01-B007-S11
+note_on_excluded_records: >
+  All six prediction-excluded records have qualified=False in the frozen
+  outcome parquet; their absence from the thresholded confusion matrix is
+  the only source of the 275-vs-269 cohort difference. AUROC and PR-AUC
+  values reported in the manuscript are computed on the 269 prediction-
+  evaluable cohort (continuous qualification-margin ranking).
+
+no_post_outcome_scientific_adaptation: true
+subsequent_changes_restricted_to: reporting_provenance_denominator_scale_correction

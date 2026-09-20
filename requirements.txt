@@ -1,0 +1,44 @@
+# requirements.txt — pinned runtime dependencies for the PIS-CMOO frozen pipeline.
+#
+# These versions were active at G5/G8 freeze time. Pinning matches the
+# reproducibility requirement of the original analysis workspace. Exact
+# pinned versions of numpy, pandas, scikit-learn, scipy, catboost, pymoo,
+# shap, and matplotlib are recorded below; TabDPT is documented in
+# configs/prediction.yaml because its package / version is documented in the
+# frozen G5 selection manifest rather than installed from a public PyPI
+# index.
+
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.1
+scikit-learn==1.5.1
+python-dateutil==2.9.0.post0
+pytz==2024.1
+
+# Tree + boosting
+catboost==1.2.5
+# xgboost, lightgbm, tabicl, tabpfn_v2, extra_trees, random_forest,
+# elastic_net, ridge, hist_gradient_boosting are referenced in the G5
+# model-selection freeze; only CatBoost (the optimization response model)
+# is required at runtime for the shipped pipeline entry points.
+
+# Multi-objective optimization
+pymoo==0.6.1.1
+
+# Interpretation
+shap==0.46.0
+
+# Tabular DL model — see configs/prediction.yaml
+# TabDPT is provided via an internal package frozen at G5 time; the public
+# release does not vendor its source. See docs/reproducibility.md.
+
+# Plotting (used by 213_g8_tables_figures.py and downstream figure scripts
+# that are NOT shipped as public entry points)
+matplotlib==3.9.1
+seaborn==0.13.2
+
+# YAML config support
+pyyaml==6.0.1
+
+# Parquet IO (used by the G8 outcome parquet reader)
+pyarrow==16.1.0

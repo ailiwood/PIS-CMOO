@@ -1,0 +1,3 @@
+scope,contexts,role_assignments,raw_rows,unique_decisions,multi_role_decisions,duplicate_bookkeeping
+development,576,1728,1771,1706,21,43
+external,41,123,121,121,2,0

@@ -1,0 +1,40 @@
+# configs/uq.yaml — frozen G5 UQ / conformal calibration
+# Mirrors: 010_true_data_analysis/08_validation/g8/freeze/g8_external_protocol_freeze.json (uq_b_algorithm)
+
+calibration:
+  strategy: 6-fold leave-one-development-mine-out cross-site residuals
+  description: "train on 5 development mines, predict the 6th, accumulate residuals"
+  scale: log1p   # residuals computed on log1p scale, then expm1 for coverage reporting
+
+nonconformity:
+  score: y_log1p_minus_pred_log1p   # one-sided
+
+distribution:
+  type: mine_balanced_empirical
+  description: "each mine contributes equal total weight to the residual distribution"
+
+quantile:
+  convention: finite_sample_higher
+  right_continuous_at: 1_minus_alpha
+
+alpha_levels:
+  primary: 0.10   # 90% coverage
+  sensitivity_95: 0.05
+  sensitivity_85: 0.15
+
+prediction_artifacts:
+  note: >
+    Conformal upper bound is applied as a hard constraint inside the
+    NSGA-III optimization (not as an objective). The upper bound is
+    UCB_log1p = pred_log1p + q_alpha and is reported back to the natural-Lu
+    scale via expm1() before being compared to acceptance_threshold_lu.
+
+support_construction:
+  scope: development_mines_only
+  scaler: g7_support.pkl
+  nearest_neighbor_index: g7_support.pkl
+  thr_95: 0.95
+  note: >
+    The joint-support constraint uses a development-only scaler +
+    nearest-neighbor index. The frozen scaler is identified by SHA256 in
+    artifacts/frozen/g7_6_full1387_status.json.
